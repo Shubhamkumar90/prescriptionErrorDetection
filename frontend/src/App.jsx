@@ -63,7 +63,13 @@ export default function App() {
           )}
         </div>
 
-        <label className={`px-8 py-3 rounded-xl font-medium ${loading?"bg-slate-500 text-slate-300 cursor-not-allowed opacity-50":"bg-white text-black cursor-pointer"}`}>
+        <label
+          className={`px-8 py-3 rounded-xl font-medium ${
+            loading
+              ? "bg-slate-500 text-slate-300 cursor-not-allowed opacity-50"
+              : "bg-white text-black cursor-pointer"
+          }`}
+        >
           Select Image
           <input
             type="file"
@@ -84,34 +90,59 @@ export default function App() {
       </div>
 
       {result && (
-        <div className="mt-12 w-full max-w-6xl grid md:grid-cols-2 gap-6">
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
+        <div className="mt-12 w-full max-w-6xl grid md:grid-cols-2 gap-6 items-start">
+          
+          {/* OCR TEXT CARD */}
+          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 self-start">
             <h2 className="text-xl font-semibold mb-4">OCR Text</h2>
-            <pre className="whitespace-pre-wrap text-sm text-slate-300">
+            <pre className="whitespace-pre-wrap text-sm text-slate-300 break-words">
               {result.ocr_text}
             </pre>
           </div>
 
-          <div className="space-y-4">
+          {/* ERROR REPORT */}
+          <div className="space-y-5">
             {result.error_report?.map((item, index) => (
               <div
                 key={index}
-                className="bg-slate-900 rounded-2xl border border-slate-800 p-5"
+                className="bg-slate-900 rounded-2xl border border-slate-800 p-5 hover:border-slate-600 transition-all"
               >
-                <h3 className="text-lg font-semibold">{item.drug.toUpperCase()}</h3>
+                {/* Header Row */}
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold tracking-wide">
+                    {item.drug.toUpperCase()}
+                  </h3>
 
-                <p className="mt-2">
-                  <span className="font-medium">Issue:</span> {item.issue}
+                  <span
+                    className={`px-3 py-1 text-xs rounded-full font-medium ${
+                      item.severity === "High"
+                        ? "bg-red-500/20 text-red-400"
+                        : item.severity === "Medium"
+                        ? "bg-yellow-500/20 text-yellow-400"
+                        : "bg-green-500/20 text-green-400"
+                    }`}
+                  >
+                    {item.severity}
+                  </span>
+                </div>
+
+                {/* Issue */}
+                <p className="mt-3 text-sm">
+                  <span className="text-slate-400">Issue:</span>{" "}
+                  <span className="text-white font-medium">{item.issue}</span>
                 </p>
 
-                <p>
-                  <span className="font-medium">Severity:</span> {item.severity}
-                </p>
+                {/* Divider */}
+                <div className="h-px bg-slate-800 my-3"></div>
 
-                <p className="text-slate-300 mt-2">{item.explanation}</p>
+                {/* Explanation */}
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {item.explanation}
+                </p>
               </div>
             ))}
           </div>
+
         </div>
       )}
     </div>
