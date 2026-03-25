@@ -128,9 +128,4 @@ async def process_image(file: UploadFile = File(...)):
         text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
         texts.append(text)
     ocr_text = "\n".join(texts)
-    error=Controller(ocr_text)
-    return {
-        "ocr_text": ocr_text,
-        "error_report":error,
-        "success":True
-    }
+    return Controller(ocr_text)

@@ -299,4 +299,10 @@ def Controller(ocr_text):
             "confidence": item["confidence"],
             "interactions": get_present_interactions(item["drug"],detected_drugs)
         })
-    return detect_prescription_errors(final_payload)
+    result=detect_prescription_errors(final_payload)
+    return {
+        "ocr_text": ocr_text,
+        "drug_analysis": result.get("drug_analysis"),
+        "user_explanation": result.get("user_explanation"),
+        "success": True
+    }

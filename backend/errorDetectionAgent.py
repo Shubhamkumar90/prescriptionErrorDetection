@@ -80,14 +80,30 @@ Prescription:
 {json.dumps(payload, indent=2)}
 
 Return strict JSON:
-[
-  {{
-    "drug": "",
-    "issue": "",
-    "severity": "High"|"Medium"|"Low"|"None",
-    "explanation": ""
-  }}
-]
+{{
+  "drug_analysis": [
+    {{
+      "drug": "",
+      "issue": "",
+      "severity": "High"|"Medium"|"Low"|"None",
+      "explanation": ""
+    }}
+  ],
+  "user_explanation": ""
+}}
+Rules for user_explanation:
+- This must be a clear, simple, human-friendly summary for a non-medical user.
+- Do NOT mention technical terms like OCR, payload, or extraction.
+- Do NOT repeat raw drug-level explanations.
+- Summarize overall safety:
+    • If any High severity → warn clearly (serious concern)
+    • If Medium → mention caution
+    • If Low → say minor issues or missing details
+    • If None → say prescription appears safe
+- Mention key types of issues briefly (e.g., missing frequency, unclear dosage)
+- Keep it short (2–4 sentences max)
+- Do not mention drug names unless necessary
+- Be calm and informative, not alarming unless severity is High
 """
 
     # response = client.models.generate_content(model="gemini-3-flash-preview",contents=prompt)
@@ -99,17 +115,22 @@ Return strict JSON:
                 model="gemini-3-flash-preview",
                 contents=prompt
             )
-            return response.text
+            clean = response.text.replace("```json", "").replace("```", "").strip()
+            error = json.loads(clean)
+            return error
 
         except Exception as e:
             if attempt < 2:
                 time.sleep(3)
             else:
-                return json.dumps([
-                    {
-                        "drug": "System",
-                        "issue": "LLM service unavailable",
-                        "severity": "Low",
-                        "explanation": "Temporary model overload. Please try again."
-                    }
-                ])
+                return {
+                    "drug_analysis": [
+                        {
+                            "drug": "System",
+                            "issue": "LLM service unavailable",
+                            "severity": "Low",
+                            "explanation": "Temporary model overload. Please try again."
+                        }
+                    ],
+                    "user_explanation": "We could not fully analyze the prescription due to a temporary system issue. Please try again."
+                }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Card from "./Components/Card";
 
 export default function App() {
   const [file, setFile] = useState(null);
@@ -50,6 +51,7 @@ export default function App() {
         Upload a prescription image for OCR and medical safety analysis
       </p>
 
+      {/* Upload Box */}
       <div className="w-full max-w-md border-2 border-slate-400 rounded-3xl bg-slate-900 p-8 flex flex-col items-center gap-6">
         <div className="w-48 h-48 border border-slate-700 rounded-2xl flex items-center justify-center bg-slate-800">
           {preview ? (
@@ -89,57 +91,43 @@ export default function App() {
         </button>
       </div>
 
+      {/* RESULT SECTION */}
       {result && (
-        <div className="mt-12 w-full max-w-6xl grid md:grid-cols-2 gap-6 items-start">
-          
-          {/* OCR TEXT CARD */}
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 self-start">
-            <h2 className="text-xl font-semibold mb-4">OCR Text</h2>
-            <pre className="whitespace-pre-wrap text-sm text-slate-300 break-words">
-              {result.ocr_text}
-            </pre>
+        <div className="mt-12 w-full max-w-6xl space-y-8">
+
+          {/* TOP: OCR + EXPLANATION */}
+          <div className="grid md:grid-cols-2 gap-6 items-start">
+
+            {/* OCR TEXT */}
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
+              <h2 className="text-xl font-semibold mb-4">OCR Text</h2>
+              <pre className="whitespace-pre-wrap text-sm text-slate-300 break-words">
+                {result.ocr_text}
+              </pre>
+            </div>
+
+            {/* USER EXPLANATION */}
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
+              <h2 className="text-xl font-semibold mb-4">
+                Overall Analysis
+              </h2>
+              <p className="text-slate-300 leading-relaxed">
+                {result.user_explanation}
+              </p>
+            </div>
+
           </div>
 
-          {/* ERROR REPORT */}
-          <div className="space-y-5">
-            {result.error_report?.map((item, index) => (
-              <div
+          {/* BOTTOM: DRUG CARDS */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {result.drug_analysis?.map((item, index) => (
+              <Card
                 key={index}
-                className="bg-slate-900 rounded-2xl border border-slate-800 p-5 hover:border-slate-600 transition-all"
-              >
-                {/* Header Row */}
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold tracking-wide">
-                    {item.drug.toUpperCase()}
-                  </h3>
-
-                  <span
-                    className={`px-3 py-1 text-xs rounded-full font-medium ${
-                      item.severity === "High"
-                        ? "bg-red-500/20 text-red-400"
-                        : item.severity === "Medium"
-                        ? "bg-yellow-500/20 text-yellow-400"
-                        : "bg-green-500/20 text-green-400"
-                    }`}
-                  >
-                    {item.severity}
-                  </span>
-                </div>
-
-                {/* Issue */}
-                <p className="mt-3 text-sm">
-                  <span className="text-slate-400">Issue:</span>{" "}
-                  <span className="text-white font-medium">{item.issue}</span>
-                </p>
-
-                {/* Divider */}
-                <div className="h-px bg-slate-800 my-3"></div>
-
-                {/* Explanation */}
-                <p className="text-slate-300 text-sm leading-relaxed">
-                  {item.explanation}
-                </p>
-              </div>
+                drug={item.drug}
+                issue={item.issue}
+                severity={item.severity}
+                explanation={item.explanation}
+              />
             ))}
           </div>
 
