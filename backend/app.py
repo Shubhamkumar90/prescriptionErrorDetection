@@ -12,8 +12,8 @@ from checkFunctions import Controller
 app = FastAPI()
 
 
-# model_id = "shubham879/trocr-prescription"
-model_id = "/trocr-prescription/final"
+model_id = "shubham879/trocr-prescription"
+# model_id = "/trocr-prescription/final"
 
 processor = TrOCRProcessor.from_pretrained(model_id)
 model = VisionEncoderDecoderModel.from_pretrained(model_id)
