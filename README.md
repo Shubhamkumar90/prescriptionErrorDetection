@@ -1,0 +1,119 @@
+# Prescription Error Detection System
+
+<p align="center">
+AI-powered system to detect and analyze errors in handwritten medical prescriptions using OCR and intelligent drug validation.
+</p>
+
+---
+
+## Overview
+
+This project aims to assist in reducing medication errors by automatically extracting and validating prescription data. It combines **OCR (Optical Character Recognition)** with **drug analysis logic** to identify potential issues in prescriptions.
+
+---
+
+## Features
+
+- Extracts text from handwritten prescriptions using TrOCR
+- Identifies and analyzes prescribed drugs
+- Detects possible errors (dosage, spelling, unknown drugs)
+- Provides user-friendly explanations of detected issues
+- Web interface for easy image upload and results visualization
+- Fast API-based processing using Flask backend
+
+---
+
+## Tech Stack
+
+**Frontend:**
+- React.js
+
+**Backend:**
+- FastAPI (Python)
+
+**Machine Learning:**
+- PyTorch
+- HuggingFace Transformers (TrOCR)
+
+
+**Other Tools & Platforms:**
+- HuggingFace
+- Kaggle
+
+**Deployment:** 
+- Hugging Face Spaces  
+- Vercel
+
+---
+
+## How It Works
+
+1. User uploads a prescription image
+2. Image is processed using **TrOCR model**
+3. Extracted text is analyzed
+4. Drug names are validated
+5. Errors are detected
+6. System generates explanation
+7. Results are returned via FastAPI and displayed on UI
+
+---
+
+## API Endpoint
+
+### POST `/process-image`
+
+**Request:**
+- Form-data → image file
+
+**Response:**
+```json
+{
+  "ocr_text": "Extracted prescription text",
+  "drug_analysis": [
+    {
+      "drug": "Paracetamol",
+      "status": "Valid",
+      "issue": null
+    }
+  ],
+  "user_explanation": "No major issues detected. Prescription looks safe.",
+  "success": true
+}
+```
+---
+## Model Details
+
+- **Model:** TrOCR (Transformer-based OCR)  
+- **Fine-tuned on:** Doctor’s Handwritten Prescription BD Dataset
+- **CER (Character Error Rate):** ~9%  
+- **Accuracy:** ~73%  
+
+---
+
+## UI Features
+
+- Image preview before upload  
+- Side-by-side display:
+  - OCR Text  
+  - Explanation  
+- Structured drug analysis table  
+
+---
+## Error Detection Capabilities
+
+- Unknown drugs  
+- Misspelled medications  
+- Unsafe prescriptions  
+- Missing information  
+- Drug validation using DrugBank database  
+- Dosage validation system  
+
+---
+## Future Improvements
+
+- Multi-language prescription support    
+
+## Visuals
+### Upload Interface
+
+### Results View
