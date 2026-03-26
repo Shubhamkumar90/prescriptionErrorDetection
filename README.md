@@ -155,7 +155,7 @@ cd ../frontend
 npm install
 npm run dev
 ```
-
+---
 ## Acknowledgements
 
 - Hugging Face for TrOCR and deployment via Spaces  
