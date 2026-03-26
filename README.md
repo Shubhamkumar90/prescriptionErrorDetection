@@ -115,5 +115,7 @@ This project aims to assist in reducing medication errors by automatically extra
 
 ## Visuals
 ### Upload Interface
+<p align="center"><img width="944" height="421" alt="image" src="https://github.com/user-attachments/assets/7a8fca38-bba2-4e83-84fb-102eddf92046" /></p>
 
 ### Results View
+<p align="center"><img width="900" height="500" alt="image" src="https://github.com/user-attachments/assets/684ee5a7-0894-47e2-8e9a-ab3309ad694f" /></p>
