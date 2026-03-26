@@ -19,7 +19,7 @@ This project aims to assist in reducing medication errors by automatically extra
 - Detects possible errors (dosage, spelling, unknown drugs)
 - Provides user-friendly explanations of detected issues
 - Web interface for easy image upload and results visualization
-- Fast API-based processing using Flask backend
+- Fast API-based processing using FastAPI backend
 
 ---
 
@@ -119,3 +119,47 @@ This project aims to assist in reducing medication errors by automatically extra
 
 ### Results View
 <p align="center"><img width="900" height="500" alt="image" src="https://github.com/user-attachments/assets/684ee5a7-0894-47e2-8e9a-ab3309ad694f" /></p>
+
+---
+## Run Locally
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shubhamkumar90/prescriptionErrorDetection.git
+cd prescription-error-detection
+```
+### 2. Setup Environment Variables
+Create a `.env` file inside the `backend/` folder:
+
+```bash
+cd backend
+touch .env
+```
+Add the following:
+```env
+GEMINI_API_KEY=your_google_gemini_api_key
+```
+### 3. Setup Backend
+```bash
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+Backend will run at:
+```
+http://127.0.0.1:8000
+```
+### 4. Setup Frontend
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+## Acknowledgements
+
+- Hugging Face for TrOCR and deployment via Spaces  
+- Google Gemini API for explanation generation  
+- Doctor’s Handwritten Prescription Dataset for OCR training  
+- DrugBank database for drug validation and analysis (access obtained via official request)  
+- Open-source community for PyTorch, FastAPI, React, and other tools  
