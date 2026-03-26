@@ -41,8 +41,8 @@ This project aims to assist in reducing medication errors by automatically extra
 - Kaggle
 
 **Deployment:** 
-- Hugging Face Spaces  
-- Vercel
+- <a href='https://huggingface.co/spaces/shubham879/trocrApi'>Hugging Face Spaces</a> 
+- <a href='https://prescription-error-detection.vercel.app/'>Vercel</a>
 
 ---
 
