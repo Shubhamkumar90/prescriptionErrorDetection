@@ -157,6 +157,6 @@ npm run dev
 
 - Hugging Face for TrOCR and deployment via Spaces  
 - Google Gemini API for explanation generation  
-- Doctor’s Handwritten Prescription Dataset for OCR training  
+- Doctor’s Handwritten Prescription BD Dataset for OCR training  
 - DrugBank database for drug validation and analysis (access obtained via official request)  
 - Open-source community for PyTorch, FastAPI, React, and other tools  
