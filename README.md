@@ -108,10 +108,7 @@ This project aims to assist in reducing medication errors by automatically extra
 - Drug validation using DrugBank database  
 - Dosage validation system  
 
----
-## Future Improvements
-
-- Multi-language prescription support    
+---  
 
 ## Visuals
 ### Upload Interface
