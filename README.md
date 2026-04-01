@@ -108,10 +108,7 @@ This project aims to assist in reducing medication errors by automatically extra
 - Drug validation using DrugBank database  
 - Dosage validation system  
 
----
-## Future Improvements
-
-- Multi-language prescription support    
+---  
 
 ## Visuals
 ### Upload Interface
@@ -160,6 +157,6 @@ npm run dev
 
 - Hugging Face for TrOCR and deployment via Spaces  
 - Google Gemini API for explanation generation  
-- Doctor’s Handwritten Prescription Dataset for OCR training  
+- Doctor’s Handwritten Prescription BD Dataset for OCR training  
 - DrugBank database for drug validation and analysis (access obtained via official request)  
 - Open-source community for PyTorch, FastAPI, React, and other tools  
